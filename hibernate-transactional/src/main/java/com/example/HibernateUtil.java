@@ -21,7 +21,7 @@ public class HibernateUtil {
 //                        .applySetting(AvailableSettings.TRANSACTION_COORDINATOR_STRATEGY, "jta")
                         .configure()
                         .build();
-                
+
                 MetadataSources sources = new MetadataSources(registry);
                 Metadata metadata = sources.getMetadataBuilder().build();
 

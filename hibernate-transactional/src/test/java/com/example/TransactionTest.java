@@ -1,6 +1,7 @@
 package com.example;
 
 import jakarta.transaction.Transactional;
+import org.hibernate.Session;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,12 +16,12 @@ public class TransactionTest {
     @Test
     @DisplayName("Modo JDBC: la transacción ls gestiona la aplicación localmente")
     void jdbc_transaction() {
-        var session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
             // Modo JDBC: llama a java.sql.Connection#setAutocommit(false) para iniciar una transacción
             session.beginTransaction();
-            session.createMutationQuery("update employee set dni = :dni where id = :id")
+            session.createMutationQuery("update Employee set dni = :dni where id = :id")
                     .setParameter("dni", "11111A")
                     .setParameter("id", 1L)
                     .executeUpdate();
